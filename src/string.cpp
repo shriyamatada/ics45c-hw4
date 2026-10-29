@@ -190,3 +190,20 @@ int String::indexOf(String s) const {
 	}
     return p - buf;
 }
+
+String::String(int length) {
+	buf = new char[length + 1];
+}
+
+String String::reverse() const {
+	String result(strlen(buf));
+	reverse_cpy(result.buf, buf);
+	return result;
+}
+
+String String::operator+(String s) const {
+	String result(s.size());
+	strcpy(result.buf, buf);
+	strcat(result.buf, s.buf);
+	return result;
+}
