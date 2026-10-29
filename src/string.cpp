@@ -93,7 +93,7 @@ const char *String::strstr(const char *haystack, const char *needle) {
 }
 
 char *String::strdup(const char *src) {
-	char *result = new char[strlen(src)];
+	char *result = new char[strlen(src) + 1];
 	strcpy(result, src);
 	return result;
 }
@@ -131,6 +131,11 @@ void String::print(std::ostream &out) const {
 std::ostream &operator<<(std::ostream &out, String s) {
     s.print(out);
     return out;
+}
+
+std::istream &operator>>(std::istream &in, String &s) {
+    s.read(in);
+    return in;
 }
 
 char &String::operator[](int index) {
@@ -206,4 +211,19 @@ String String::operator+(String s) const {
 	strcpy(result.buf, buf);
 	strcat(result.buf, s.buf);
 	return result;
+}
+
+String &String::operator+=(String s) {
+    String result(size() + s.size());
+    strcpy(result.buf, buf);
+    strcat(result.buf, s.buf);
+    swap(result);
+    return *this;
+}
+
+void String::read(std::istream &in) {
+    char temp[1024]; //1023 + 1 for terminator
+    in >> temp;
+    String result(temp);
+    swap(result);
 }
