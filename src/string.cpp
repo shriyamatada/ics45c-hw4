@@ -207,7 +207,7 @@ String String::reverse() const {
 }
 
 String String::operator+(String s) const {
-	String result(s.size());
+	String result(size() + s.size());
 	strcpy(result.buf, buf);
 	strcat(result.buf, s.buf);
 	return result;
