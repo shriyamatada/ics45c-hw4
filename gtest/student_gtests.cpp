@@ -36,6 +36,7 @@ TEST(StringFunction, strdup) {
 }
 
 TEST(StringFunction, strncpy) {
+	char result[20];
     EXPECT_EQ(String::strncpy(result, "altruistic", 10), result);
     EXPECT_STREQ(result, "altruistic");
 
